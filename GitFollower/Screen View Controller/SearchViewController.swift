@@ -66,7 +66,6 @@ class SearchViewController: UIViewController {
         
         view.addSubview(searchText)
         searchText.delegate = self
-        searchText.text = "NigarJafar"
         NSLayoutConstraint.activate([
             searchText.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 44),
             searchText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),

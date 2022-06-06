@@ -53,7 +53,7 @@ class FollowersViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        print("Ali")
+        print("")
         
     }
     
