@@ -14,7 +14,7 @@ struct UserModel: Codable {
     var name: String?
     var location: String?
     var bio: String?
-    var created_at: String?
+    var created_at: Date?
     var followers: Int
     var following: Int
     var public_repos: Int

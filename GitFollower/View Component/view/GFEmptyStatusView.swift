@@ -18,17 +18,13 @@ class GFEmptyStatusView: UIView {
         configure()
     }
     
-    
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(message: String){
-        super.init(frame: .zero)
+    convenience init(message: String){
+        self.init(frame: .zero)
         messageLabel.text = message
-        configure()
-        
     }
     
     
@@ -40,7 +36,6 @@ class GFEmptyStatusView: UIView {
         messageLabel.numberOfLines = 3
         messageLabel.textColor = .secondaryLabel
         emptyImageView.image = UIImage(named: "backgit")
-//        emptyImageView.frame = bounds
         emptyImageView.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         

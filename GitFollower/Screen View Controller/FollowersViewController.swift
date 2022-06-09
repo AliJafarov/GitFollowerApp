@@ -53,7 +53,28 @@ class FollowersViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        print("")
+        
+        showLoadingView()
+        NetworkManager.shared.getUserInfo(for: userName) { [weak self] result in
+            guard let self = self else { return }
+            self.dismissLoadingView()
+            switch result {
+            case .success(let user):
+                let favorite = FollowerModel(login: user.login, avatar_url: user.avatar_url)
+                PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
+                    guard let self = self else { return }
+                    guard let error = error else {
+                        self.presentGFAlert(title: "Success", message: "You have succesfully favorited this user", buttonTitle: "Close")
+                        return
+                    }
+                    self.presentGFAlert(title: "Something went wrong", message: error.rawValue, buttonTitle: "OK")
+                }
+                
+            case .failure(let error):
+                self.presentGFAlert(title: "Something went wrong", message: error.rawValue, buttonTitle: "OK")
+                
+            }
+        }
         
     }
     
@@ -113,7 +134,6 @@ class FollowersViewController: UIViewController {
     
     
     func updateData(on followers: [FollowerModel]){
-        print(followers.count)
         var snapshot = NSDiffableDataSourceSnapshot<Section, FollowerModel>()
         snapshot.appendSections([.main])
         snapshot.appendItems(followers)

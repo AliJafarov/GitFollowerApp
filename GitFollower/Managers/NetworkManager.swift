@@ -76,7 +76,9 @@ class NetworkManager {
             }
             
             do {
-                let result = try JSONDecoder().decode(UserModel.self, from: data)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let result = try decoder.decode(UserModel.self, from: data)
                 completion(.success(result))
             }
             catch {
